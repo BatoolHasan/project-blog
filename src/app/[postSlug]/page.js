@@ -8,6 +8,8 @@ import { loadBlogPost } from "@/helpers/file-helpers";
 
 import { MDXRemote } from "next-mdx-remote/rsc";
 
+import CodeSnippet from "@/components/CodeSnippet";
+
 async function BlogPost({ params }) {
   const { postSlug } = await params;
   const { content } = await getBlogPost(postSlug);
@@ -15,7 +17,7 @@ async function BlogPost({ params }) {
     <article className={styles.wrapper}>
       <BlogHero title="Example post!" publishedOn={new Date()} />
       <div className={styles.page}>
-        <MDXRemote source={content} />
+        <MDXRemote source={content} components={{ pre: CodeSnippet }} />
       </div>
     </article>
   );

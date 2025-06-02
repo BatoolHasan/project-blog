@@ -11,11 +11,20 @@ import styles from "./DivisionGroupsDemo.module.css";
 
 import Spinner from "../Spinner";
 
+import { motion } from "framer-motion";
+
+const SPRING = {
+  type: "spring",
+  stiffness: 300,
+  damping: 40,
+};
 function DivisionGroupsDemo({
   numOfItems = 12,
   initialNumOfGroups = 1,
   includeRemainderArea,
 }) {
+  const layoutId = React.useId();
+
   const [numOfGroups, setNumOfGroups] = React.useState(initialNumOfGroups);
 
   const numOfItemsPerGroup = Math.floor(numOfItems / numOfGroups);
@@ -54,7 +63,16 @@ function DivisionGroupsDemo({
             {range(numOfGroups).map((groupIndex) => (
               <div key={groupIndex} className={styles.group}>
                 {range(numOfItemsPerGroup).map((index) => {
-                  return <div key={index} className={styles.item} />;
+                  const id = `${layoutId}:${groupIndex}:${index}`;
+                  return (
+                    <motion.div
+                      key={`${groupIndex}-${index}`}
+                      className={styles.item}
+                      transition={SPRING}
+                      layout={true}
+                      layoutId={id}
+                    />
+                  );
                 })}
               </div>
             ))}

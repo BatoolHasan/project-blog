@@ -17,6 +17,7 @@ const DivisionGroupsDemo = React.lazy(() =>
 async function BlogPost({ params }) {
   const { postSlug } = await params;
   const { content } = await getBlogPost(postSlug);
+
   return (
     <article className={styles.wrapper}>
       <BlogHero title="Example post!" publishedOn={new Date()} />

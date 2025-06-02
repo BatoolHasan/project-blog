@@ -86,12 +86,15 @@ function DivisionGroupsDemo({
               <p className={styles.remainderHeading}>Remainder Area</p>
 
               {range(remainder).map((index) => {
+                const prevTotal = numOfItemsPerGroup * numOfGroups;
+                const id = `${layoutId}:${prevTotal + index}`;
+
                 return (
                   <motion.div
-                    key={index}
+                    key={id}
                     className={styles.item}
                     transition={SPRING}
-                    layout={true}
+                    layoutId={id}
                   />
                 );
               })}
